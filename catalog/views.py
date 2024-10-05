@@ -9,6 +9,12 @@ def show_home(request: HttpRequest):
         return render(request, "catalog/home.html")
 
 
+def show_conacts(request: HttpRequest):
+    """обрабатываем запрос и возвращаем html-страницу"""
+    if request.method == 'GET':
+        return render(request, "catalog/contacts.html")
+
+
 def contacts(request: HttpRequest):
     """Обрабатываем форму и возвращаем ответ"""
     if request.method == 'POST':
