@@ -3,6 +3,7 @@ from django.db import models
 
 class Category(models.Model):
     """Модель создания таблицы в БД Категория"""
+    objects = None
     name = models.CharField(max_length=150, verbose_name='Наименование')
     description = models.CharField(max_length=500, verbose_name='Описание', null=True)
 
@@ -17,6 +18,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     """Модель создания таблицы в БД Продукты"""
+    objects = None
     name = models.CharField(max_length=150, verbose_name='Наименование')  # столбцы таблицы
     description = models.CharField(max_length=500, verbose_name='Описание', null=True)
     picture = models.ImageField(upload_to='photos/', verbose_name='Изображение', null=True)
