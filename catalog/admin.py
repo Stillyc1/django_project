@@ -18,4 +18,4 @@ class ProductAdmin(admin.ModelAdmin):
     """Отображает модели(таблицу) Продуктов в админке"""
     list_display = ('id', 'name', 'price', 'category',)
     list_filter = ('name', 'price', 'category',)
-    search_fields = ('id', 'name', 'category__name')
+    search_fields = ('id', 'name', 'category__name',)
