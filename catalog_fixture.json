@@ -1,0 +1,57 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Телеграм-боты",
+        "description": "Телеграм-боты для решения ваших повседневных задач и автоматизации процессов"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Плагины",
+        "description": "Плагины для улучшения взаимодействия пользователя и сайта"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "News_day",
+        "description": "Бот Новости дня! Собирает важную информацию с тг-каналов и кратко пересказывает все важные новости за сегодняшний день",
+        "picture": "",
+        "category": 1,
+        "price": "300.00",
+        "created_at": "2024-10-12T14:51:09.398Z",
+        "updated_at": "2024-10-12T14:51:09.398Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "protect_pay",
+        "description": "Плагин дополнительной защиты оплаты на сайтах",
+        "picture": "",
+        "category": 2,
+        "price": "599.00",
+        "created_at": "2024-10-12T14:53:07.247Z",
+        "updated_at": "2024-10-12T14:53:07.247Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "live_effects",
+        "description": "Плагин создает живые эффекты на странице пользователя",
+        "picture": "",
+        "category": 2,
+        "price": "399.00",
+        "created_at": "2024-10-12T14:54:20.177Z",
+        "updated_at": "2024-10-12T14:54:20.177Z"
+    }
+}
+]

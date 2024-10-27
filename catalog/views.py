@@ -1,18 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpRequest, HttpResponse
+from .models import Product
 
 
 # Create your views here.
 def show_home(request: HttpRequest):
     """функция обрабатывает запрос и возвращает html-страницу"""
     if request.method == 'GET':
-        return render(request, "catalog/home.html")
+        products = Product.objects.all()
+        context = {'products': products}
 
-
-def show_conacts(request: HttpRequest):
-    """обрабатываем запрос и возвращаем html-страницу"""
-    if request.method == 'GET':
-        return render(request, "catalog/contacts.html")
+        return render(request, "catalog/home.html", context=context)
 
 
 def contacts(request: HttpRequest):
@@ -25,3 +23,9 @@ def contacts(request: HttpRequest):
         # Здесь мы просто возвращаем простой ответ
         return HttpResponse(f"Спасибо, {name}! Ваше сообщение получено.")
     return render(request, 'catalog/contacts.html')
+
+
+def product_detail(request: HttpRequest, pk: int):
+    product = get_object_or_404(Product, pk=pk)
+    context = {'product': product}
+    return render(request, 'catalog/product_detail.html', context=context)
