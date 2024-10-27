@@ -1,3 +1,5 @@
+from django.http import HttpResponse
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
 
 from .models import Product
@@ -21,6 +23,17 @@ class CatalogDetailView(DetailView):
 class CatalogTemplateView(TemplateView):
     """Класс представления обратной связи с заполнением формы"""
     template_name = "catalog/contacts.html"
+
+    def post(self, request, *args, **kwargs):
+        """Обрабатываем форму и возвращаем ответ"""
+        if self.request.method == 'POST':
+            # Получение данных из формы
+            name = request.POST.get('name')
+            message = request.POST.get('message')
+            # Обработка данных (например, сохранение в БД, отправка email и т. д.)
+            # Здесь мы просто возвращаем простой ответ
+            return HttpResponse(f"Спасибо, {name}! Ваше сообщение получено.")
+        return render(request, 'catalog/contacts.html')
 
 
 # def show_home(request: HttpRequest):

@@ -17,16 +17,12 @@
             <div class="col-3">
                 <div class="card mb-4 box-shadow">
                     <div class="card-header">
-                        <img src="{{article_list.picture | media_filter}}" width="200" height="200">
                         <h4 class="my-0 font-weight-normal">{{ article.header }}</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title">$</h1>
+                        <p class="card-title  pricing-card-title">{{ article.created_at | date:"d M Y"}}<p/>
                         <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                             <li>- {{ article.content|truncatechars:30 }}</li>
-                            <li>- Поддержка</li>
-                            <li>- Установка на сервер</li>
-                            <li>- Получение обновлений</li>
                         </ul>
                         <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blogs:article_detail' article.pk%}">Прочитать</a>
                     </div>
