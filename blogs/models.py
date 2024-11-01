@@ -9,7 +9,7 @@ class Article(models.Model):
     content = models.TextField(verbose_name='Содержание')
     picture = models.ImageField(upload_to='blogs/photo/', verbose_name='Изображение', null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
     number_of_views = models.IntegerField(default=0)
 
