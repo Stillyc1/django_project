@@ -1,4 +1,4 @@
-from django.urls import reverse_lazy, reverse, path
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView
 
 from .models import Article
