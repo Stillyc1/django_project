@@ -1,7 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, TemplateView
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, DeleteView, UpdateView
 
+from .forms import ProductForm
 from .models import Product
 
 
@@ -20,6 +22,36 @@ class CatalogDetailView(DetailView):
     context_object_name = "product"
 
 
+class CatalogCreateView(CreateView):
+    """контроллер Создание статьи"""
+    model = Product
+    template_name = "catalog/product_create.html"
+    context_object_name = "product_create"
+
+    form_class = ProductForm
+    success_url = reverse_lazy('catalog:show_home')
+
+
+class ProductUpdateView(UpdateView):
+    """Контроллер изменения продукта"""
+    model = Product
+    template_name = "catalog/product_create.html"
+    context_object_name = "product_create"
+
+    form_class = ProductForm
+
+    def get_success_url(self):
+        return reverse('catalog:product', args=[self.kwargs.get('pk')])
+
+
+class ProductDeleteView(DeleteView):
+    """Контроллер удаления продукта"""
+    model = Product
+    context_object_name = "product_delete"
+
+    success_url = reverse_lazy("catalog:show_home")
+
+
 class CatalogTemplateView(TemplateView):
     """Класс представления обратной связи с заполнением формы"""
     template_name = "catalog/contacts.html"
@@ -34,28 +66,3 @@ class CatalogTemplateView(TemplateView):
             # Здесь мы просто возвращаем простой ответ
             return HttpResponse(f"Спасибо, {name}! Ваше сообщение получено.")
         return render(request, 'catalog/contacts.html')
-
-
-# def show_home(request: HttpRequest):
-#     """функция обрабатывает запрос и возвращает html-страницу"""
-#     if request.method == 'GET':
-#         products = Product.objects.all()
-#         context = {'products': products}
-#
-#         return render(request, "catalog/home.html", context=context)
-
-# def contacts(request: HttpRequest):
-#     """Обрабатываем форму и возвращаем ответ"""
-#     if request.method == 'POST':
-#         # Получение данных из формы
-#         name = request.POST.get('name')
-#         message = request.POST.get('message')
-#         # Обработка данных (например, сохранение в БД, отправка email и т. д.)
-#         # Здесь мы просто возвращаем простой ответ
-#         return HttpResponse(f"Спасибо, {name}! Ваше сообщение получено.")
-#     return render(request, 'catalog/contacts.html')
-
-# def product_detail(request: HttpRequest, pk: int):
-#     product = get_object_or_404(Product, pk=pk)
-#     context = {'product': product}
-#     return render(request, 'catalog/product_detail.html', context=context)
