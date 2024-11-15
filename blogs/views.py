@@ -10,7 +10,7 @@ class ArticleCreateView(CreateView):
     template_name = "blogs/create_article.html"
     context_object_name = "article_create"
 
-    fields = ('header', 'content')
+    fields = ('header', 'content', 'picture',)
     success_url = reverse_lazy('blogs:article_list')
 
 
@@ -30,7 +30,7 @@ class ArticleUpdateView(UpdateView):
     template_name = "blogs/create_article.html"
     context_object_name = "article_create"
 
-    fields = ('header', 'content')
+    fields = ('header', 'content', 'picture',)
 
     def get_success_url(self):
         return reverse('blogs:article_detail', args=[self.kwargs.get('pk')])
