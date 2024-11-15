@@ -21,7 +21,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('catalog/', include('catalog.urls', namespace='catalog'))  # Достаем маршруты страниц из приложения catalog
+    path('', include('catalog.urls', namespace='catalog')),  # Достаем маршруты страниц из приложения catalog
+    path('blogs/', include('blogs.urls', namespace='blogs'))
 ]
 
 if settings.DEBUG:
