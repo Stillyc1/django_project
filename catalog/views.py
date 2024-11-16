@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, DeleteView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import ProductForm
 from .models import Product
@@ -22,7 +23,7 @@ class CatalogDetailView(DetailView):
     context_object_name = "product"
 
 
-class CatalogCreateView(CreateView):
+class CatalogCreateView(LoginRequiredMixin, CreateView):
     """контроллер Создание статьи"""
     model = Product
     template_name = "catalog/product_create.html"
@@ -32,7 +33,7 @@ class CatalogCreateView(CreateView):
     success_url = reverse_lazy('catalog:show_home')
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     """Контроллер изменения продукта"""
     model = Product
     template_name = "catalog/product_create.html"
@@ -44,7 +45,7 @@ class ProductUpdateView(UpdateView):
         return reverse('catalog:product', args=[self.kwargs.get('pk')])
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     """Контроллер удаления продукта"""
     model = Product
     context_object_name = "product_delete"
