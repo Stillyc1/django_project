@@ -6,7 +6,6 @@ from .models import CustomUser
 
 class CustomUserCreationForm(UserCreationForm):
     phone_number = forms.CharField(max_length=15, required=False, help_text="Необязательное поле, введите номер телефона.")
-    username = forms.CharField(max_length=50, required=False)
 
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
@@ -22,9 +21,6 @@ class CustomUserCreationForm(UserCreationForm):
             'class': 'form-select'
         })
         self.fields['password2'].widget.attrs.update({
-            'class': 'form-select'
-        })
-        self.fields['username'].widget.attrs.update({
             'class': 'form-select'
         })
 

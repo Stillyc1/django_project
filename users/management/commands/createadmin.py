@@ -11,9 +11,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         User = get_user_model()
         user = User.objects.create(
-            email='Alex_admin@mail.ru',
-            first_name="Admin",
-            last_name="Admin",
+            email='admin@mail.ru',
+            first_name="admin",
+            last_name="admin",
         )
 
         user.set_password(os.getenv('PASSWORD'))
