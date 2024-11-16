@@ -30,7 +30,13 @@
                             <li>- Установка на сервер</li>
                             <li>- Получение обновлений</li>
                         </ul>
-                        <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product' product.pk%}">Купить</a>
+                        <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product' product.pk%}">
+                            {% if user.is_authenticated %}
+                                Купить
+                            {% else %}
+                                Посмотреть
+                            {% endif %}
+                        </a>
                     </div>
                 </div>
             </div>
