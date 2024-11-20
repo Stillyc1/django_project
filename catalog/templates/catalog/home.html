@@ -8,38 +8,36 @@
     <h1 class="display-4">Skystore</h1>
     <p class="lead">Skystore - это отличный вариант хранения ваших плагинов и примеров кода, который вы бы хотели
         продать</p>
-    <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_create'%}">Создать</a>
+    {% if user.is_authenticated %}
+        <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_create'%}">Добавить продукт</a>
+    {% endif %}
 </div>
 
 {% endblock %}
 
 {% block content %}
-    <div class="row text-center">
-        {% for product in products %}
-            <div class="col-3">
-                <div class="card mb-4 box-shadow">
-                    <div class="card-header">
-                        <img src="{{product.picture | media_filter}}" width="200" height="200">
-                        <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">{{ product.price }}$</h1>
-                        <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                            <li>- {{ product.description|truncatechars:30 }}</li>
-                            <li>- Поддержка</li>
-                            <li>- Установка на сервер</li>
-                            <li>- Получение обновлений</li>
-                        </ul>
-                        <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product' product.pk%}">
-                            {% if user.is_authenticated %}
-                                Купить
-                            {% else %}
-                                Посмотреть
-                            {% endif %}
-                        </a>
-                    </div>
-                </div>
+<div class="row text-center">
+    {% for product in products %}
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <img src="{{product.picture | media_filter}}" width="200" height="200">
+                <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
             </div>
-        {% endfor %}
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">{{ product.price }}$</h1>
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li>- {{ product.description|truncatechars:30 }}</li>
+                    <li>- Поддержка</li>
+                    <li>- Установка на сервер</li>
+                    <li>- Получение обновлений</li>
+                </ul>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product' product.pk%}">
+                    Купить
+                </a>
+            </div>
+        </div>
     </div>
+    {% endfor %}
+</div>
 {% endblock %}

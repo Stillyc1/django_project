@@ -8,7 +8,7 @@ class ProductForm(ModelForm):
     """Класс создания формы добавления продуктов"""
     class Meta:
         model = Product
-        fields = "__all__"
+        exclude = ('is_publication', 'owner')
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
@@ -47,3 +47,16 @@ class ProductForm(ModelForm):
         if int(price) <= 0:
             raise ValidationError("Цена должна быть положительная")
         return price
+
+
+class ProductModerForm(ProductForm, ModelForm):
+    class Meta:
+        model = Product
+        exclude = ('owner',)
+
+    def __init__(self, *args, **kwargs):
+        super(ProductModerForm, self).__init__(*args, **kwargs)
+
+        self.fields['is_publication'].widget.attrs.update({
+            'class': 'form-check-input'
+        })
