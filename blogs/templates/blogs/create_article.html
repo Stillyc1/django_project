@@ -1,5 +1,5 @@
 {% extends 'blogs/basic_design.html' %}
-{% load my_tags %}
+{% load my_tags_blogs %}
 {% block title %}Мы пишем{% endblock %}
 
 {% block header %}
@@ -11,7 +11,7 @@
 
 {% block content %}
 <div class="card-body">
-    <form method="post" action="" class="form-floating">
+    <form method="post" action="" class="form-floating" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
             {{ form.as_p }}

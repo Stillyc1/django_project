@@ -1,16 +1,17 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView
 
 from .models import Article
 
 
-class ArticleCreateView(CreateView):
+class ArticleCreateView(LoginRequiredMixin, CreateView):
     """контроллер Создание статьи"""
     model = Article
     template_name = "blogs/create_article.html"
     context_object_name = "article_create"
 
-    fields = ('header', 'content')
+    fields = ('header', 'content', 'picture',)
     success_url = reverse_lazy('blogs:article_list')
 
 
@@ -24,19 +25,19 @@ class ArticleListView(ListView):
         return Article.objects.filter(is_active=True)
 
 
-class ArticleUpdateView(UpdateView):
+class ArticleUpdateView(LoginRequiredMixin, UpdateView):
     """Контроллер изменения статьи"""
     model = Article
     template_name = "blogs/create_article.html"
     context_object_name = "article_create"
 
-    fields = ('header', 'content')
+    fields = ('header', 'content', 'picture',)
 
     def get_success_url(self):
         return reverse('blogs:article_detail', args=[self.kwargs.get('pk')])
 
 
-class ArticleDeleteView(DeleteView):
+class ArticleDeleteView(LoginRequiredMixin, DeleteView):
     """Контроллер удаления статьи"""
     model = Article
     context_object_name = "article_delete"
