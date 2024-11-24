@@ -2,13 +2,16 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
+from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.cache import cache_page
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import ProductForm, ProductModerForm
-from .models import Product
+from .models import Product, Category
 from users.models import CustomUser
+from .services import GetListProduct, LoadProductCategory
 
 
 # Create your views here.
@@ -18,7 +21,21 @@ class CatalogListView(ListView):
     template_name = "catalog/home.html"
     context_object_name = "products"
 
+    def get_queryset(self):
+        return GetListProduct.get_list_product_from_cache()
 
+
+class ProductCategoryView(ListView):
+    """Класс представления категории продуктов"""
+    model = Product
+    template_name = "catalog/product_category.html"
+    context_object_name = 'product_category'
+
+    def get_queryset(self):
+        return LoadProductCategory.load_product_category(category_id=self.kwargs.get('pk'))
+
+
+@method_decorator(cache_page(60), name='dispatch')
 class CatalogDetailView(DetailView):
     """Класс представления полной информации о товаре, на отдельной странице"""
     model = Product

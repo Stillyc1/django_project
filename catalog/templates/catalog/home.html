@@ -28,6 +28,7 @@
                 <h1 class="card-title pricing-card-title">{{ product.price }}$</h1>
                 <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                     <li>- {{ product.description|truncatechars:30 }}</li>
+                    <li>- Категория: {{ product.category|truncatechars:30 }}</li>
                     <li>- Поддержка</li>
                     <li>- Установка на сервер</li>
                     <li>- Получение обновлений</li>

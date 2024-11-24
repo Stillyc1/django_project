@@ -8,6 +8,7 @@
             {% if user.is_authenticated %}
                 <form method="post" action="{% url 'users:logout' %}" style="display: inline">
                     {% csrf_token %}
+                    <p class="my-0 p-2 float-end">{{ user.email }}</p>
                     <button type="submit" class="p-2 btn btn-outline-primary">Выйти</button>
                 </form>
             {% else %}
